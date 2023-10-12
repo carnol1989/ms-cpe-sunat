@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "5f205753-1c9f-44c5-81ec-40f96c4e92e1",
+		"name": "EPS GRAU",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7119902"
+	},
+	"item": [
+		{
+			"name": "read file xlsx",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/CARLOS/OneDrive/6. EPS GRAU/TEST2.xlsx"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/excel/upload?",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"excel",
+						"upload"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create file txt",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/excel/createFileTxt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"excel",
+						"createFileTxt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download file txt",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/excel/downloadFileTxt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"excel",
+						"downloadFileTxt"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
