@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,8 +37,8 @@ public class ReciboHonorarioExcelController {
     ReciboHonorarioExcelService reciboHonorarioExcelService;
 
     @PostMapping("/excel/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file,
-                                                      HttpServletRequest request) {
+    public String uploadFile(Model model, @RequestParam("file") MultipartFile file,
+                             HttpServletRequest request) {
         String message = "";
         List<ReciboHonorario> lista = new ArrayList<>();
         if (ExcelHelper.hasExcelFormat(file)) {
@@ -46,26 +47,34 @@ public class ReciboHonorarioExcelController {
                 request.getSession().setAttribute(Constantes.LISTA_RECIBO_HONORARIOS, lista);
 
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
-                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
                 e.printStackTrace();
                 message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
             }
+        } else {
+            message = "Please upload an excel file!";
         }
 
-        message = "Please upload an excel file!";
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+        model.addAttribute(Constantes.TITLE, Constantes.TITLE_RECIBO_HONORARIO);
+        model.addAttribute(Constantes.ACTION_UPLOAD, "/api/recibo-honorario/excel/upload");
+        model.addAttribute(Constantes.ACTION_CREATE, "/api/recibo-honorario/createFileTxt");
+        model.addAttribute(Constantes.ACTION_DOWNLOAD, "/api/recibo-honorario/downloadFileTxt");
+        model.addAttribute(Constantes.MESSAGE, message);
+
+        return "upload_form";
     }
 
     @GetMapping("/createFileTxt")
-    public ResponseEntity<?> createFileTxt(HttpSession session) throws IOException {
-        String filename = "cpevalidez-recibohonorarios.txt";
+    public String createFileTxt(Model model, HttpSession session) throws IOException {
+        String message = "Se creo el archivo .txt en su PC";
         List<ReciboHonorario> lista = (List<ReciboHonorario>) session.getAttribute(Constantes.LISTA_RECIBO_HONORARIOS);
-
         reciboHonorarioExcelService.loadFileTxtService(lista);
-
-        return ResponseEntity.ok().build();
+        model.addAttribute(Constantes.TITLE, Constantes.TITLE_RECIBO_HONORARIO);
+        model.addAttribute(Constantes.ACTION_UPLOAD, "/api/recibo-honorario/excel/upload");
+        model.addAttribute(Constantes.ACTION_CREATE, "/api/recibo-honorario/createFileTxt");
+        model.addAttribute(Constantes.ACTION_DOWNLOAD, "/api/recibo-honorario/downloadFileTxt");
+        model.addAttribute(Constantes.MESSAGE, message);
+        return "upload_form";
     }
 
     @GetMapping("/downloadFileTxt")

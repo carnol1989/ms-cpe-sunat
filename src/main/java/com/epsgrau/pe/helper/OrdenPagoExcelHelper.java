@@ -83,7 +83,7 @@ public class OrdenPagoExcelHelper {
         }
     }
 
-    public static List<OrdenPago> excelToOrdenes(InputStream is) {
+    public static List<OrdenPago> excelToOrdenesPago(InputStream is) {
         try {
             Workbook workbook = new XSSFWorkbook(is);
 
@@ -124,11 +124,11 @@ public class OrdenPagoExcelHelper {
                                 break;
 
                             case 3:
-                                ordenPago.setSerie(currentCell.getStringCellValue());
+                                ordenPago.setSerie(currentCell.getStringCellValue().trim());
                                 break;
 
                             case 4:
-                                ordenPago.setNumero(currentCell.getStringCellValue());
+                                ordenPago.setNumero(currentCell.getStringCellValue().trim());
                                 break;
 
                             case 5:

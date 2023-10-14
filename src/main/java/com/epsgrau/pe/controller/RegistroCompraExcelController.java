@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,36 +37,44 @@ public class RegistroCompraExcelController {
     RegistroCompraExcelService registroCompraExcelService;
 
     @PostMapping("/excel/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file,
-                                                      HttpServletRequest request) {
+    public String uploadFile(Model model, @RequestParam("file") MultipartFile file,
+                             HttpServletRequest request) {
         String message = "";
         List<RegistroCompra> lista = new ArrayList<>();
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
                 lista = registroCompraExcelService.saveFileService(file);
                 request.getSession().setAttribute(Constantes.LISTA_REGISTRO_COMPRAS, lista);
-
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
-                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
                 e.printStackTrace();
                 message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
             }
+        } else {
+            message = "Please upload an excel file!";
         }
 
-        message = "Please upload an excel file!";
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
+        model.addAttribute(Constantes.TITLE, Constantes.TITLE_REGISTRO_COMPRAS);
+        model.addAttribute(Constantes.ACTION_UPLOAD, "/api/registro-compra/excel/upload");
+        model.addAttribute(Constantes.ACTION_CREATE, "/api/registro-compra/createFileTxt");
+        model.addAttribute(Constantes.ACTION_DOWNLOAD, "/api/registro-compra/downloadFileTxt");
+        model.addAttribute(Constantes.MESSAGE, message);
+        model.addAttribute(Constantes.LISTA_REGISTRO_COMPRAS, lista);
+
+        return "upload_form";
     }
 
     @GetMapping("/createFileTxt")
-    public ResponseEntity<?> createFileTxt(HttpSession session) throws IOException {
-        String filename = "cpevalidez-registrocompras.txt";
+    public String createFileTxt(Model model, HttpSession session) throws IOException {
+        String message = "Se creo el archivo .txt en su PC";
         List<RegistroCompra> lista = (List<RegistroCompra>) session.getAttribute(Constantes.LISTA_REGISTRO_COMPRAS);
-
         registroCompraExcelService.loadFileTxtService(lista);
-
-        return ResponseEntity.ok().build();
+        model.addAttribute(Constantes.TITLE, Constantes.TITLE_REGISTRO_COMPRAS);
+        model.addAttribute(Constantes.ACTION_UPLOAD, "/api/registro-compra/excel/upload");
+        model.addAttribute(Constantes.ACTION_CREATE, "/api/registro-compra/createFileTxt");
+        model.addAttribute(Constantes.ACTION_DOWNLOAD, "/api/registro-compra/downloadFileTxt");
+        model.addAttribute(Constantes.MESSAGE, message);
+        return "upload_form";
     }
 
     @GetMapping("/downloadFileTxt")

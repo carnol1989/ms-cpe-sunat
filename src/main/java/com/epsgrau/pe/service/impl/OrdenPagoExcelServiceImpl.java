@@ -23,7 +23,7 @@ public class OrdenPagoExcelServiceImpl implements OrdenPagoExcelService {
     public List<OrdenPago> saveFileService(MultipartFile file) {
         List<OrdenPago> ordenes = new ArrayList<>();
         try {
-            ordenes = OrdenPagoExcelHelper.excelToOrdenes(file.getInputStream());
+            ordenes = OrdenPagoExcelHelper.excelToOrdenesPago(file.getInputStream());
             System.out.println("Lista Ordenes Pago: " + ordenes.size());
             ordenes = deleteOrdenes(ordenes);
             System.out.println("Lista Ordenes Pago (mod): " + ordenes.size());
