@@ -23,4 +23,10 @@ public class TipoComprobantePago {
     @Column
     private String descripcion;
 
+    @Column
+    private String abreviatura;
+
+    @Column
+    private String indEstado;
+
 }
