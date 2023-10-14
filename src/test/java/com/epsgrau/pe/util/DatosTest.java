@@ -5,7 +5,7 @@ import com.epsgrau.pe.model.TipoComprobantePago;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Datos {
+public class DatosTest {
 
     public static TipoComprobantePago FACTURA = new TipoComprobantePago(1L, "01", "FACTURA", "F-E", "S");
     public static TipoComprobantePago BOLETA_VENTA = new TipoComprobantePago(2L, "03", "BOLETA DE VENTA", "B", "S");

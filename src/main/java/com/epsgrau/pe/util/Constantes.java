@@ -5,5 +5,6 @@ public class Constantes {
     public static String LISTA_CAJA_CHICA = "listaCajaChicas";
     public static String LISTA_ORDENES_PAGO = "listaOrdenesPago";
     public static String LISTA_REGISTRO_COMPRAS = "listaRegistroCompras";
+    public static String LISTA_RECIBO_HONORARIOS = "listaReciboHonorarios";
 
 }

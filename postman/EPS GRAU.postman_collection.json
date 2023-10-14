@@ -7,83 +7,421 @@
 	},
 	"item": [
 		{
-			"name": "read file xlsx",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "/C:/Users/CARLOS/OneDrive/6. EPS GRAU/TEST2.xlsx"
+			"name": "caja-chica",
+			"item": [
+				{
+					"name": "read file xlsx",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/CARLOS/OneDrive/6. EPS GRAU/TEST2.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/caja-chica/excel/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"caja-chica",
+								"excel",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8081/api/excel/upload?",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"excel",
-						"upload"
-					],
-					"query": [
-						{
-							"key": "",
-							"value": null
+				{
+					"name": "create file txt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/caja-chica/createFileTxt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"caja-chica",
+								"createFileTxt"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "download file txt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/caja-chica/downloadFileTxt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"caja-chica",
+								"downloadFileTxt"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "create file txt",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8081/api/excel/createFileTxt",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"excel",
-						"createFileTxt"
-					]
+			"name": "tipo-comprobante-pago",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/tipo-comprobante-pago",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"tipo-comprobante-pago"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/tipo-comprobante-pago/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"tipo-comprobante-pago",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByDescripcion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/tipo-comprobante-pago/descripcion?buscar=FACTURA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"tipo-comprobante-pago",
+								"descripcion"
+							],
+							"query": [
+								{
+									"key": "buscar",
+									"value": "FACTURA"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "download file txt",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8081/api/excel/downloadFileTxt",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"excel",
-						"downloadFileTxt"
-					]
+			"name": "orden-pago",
+			"item": [
+				{
+					"name": "read file xlsx",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/CARLOS/OneDrive/6. EPS GRAU/ORDENES.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/orden-pago/excel/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orden-pago",
+								"excel",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create file txt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/orden-pago/createFileTxt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orden-pago",
+								"createFileTxt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download file txt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/orden-pago/downloadFileTxt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"orden-pago",
+								"downloadFileTxt"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "registro-compras",
+			"item": [
+				{
+					"name": "read file xlsx",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/CARLOS/OneDrive/6. EPS GRAU/TEST_REGISTRO_COMPRAS.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/registro-compra/excel/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"registro-compra",
+								"excel",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create file txt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/registro-compra/createFileTxt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"registro-compra",
+								"createFileTxt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download file txt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/registro-compra/downloadFileTxt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"registro-compra",
+								"downloadFileTxt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "recibo-honorarios",
+			"item": [
+				{
+					"name": "read file xlsx",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/CARLOS/OneDrive/6. EPS GRAU/TEST_RECIBOS_HONORARIOS.xlsx"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8081/api/recibo-honorario/excel/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"recibo-honorario",
+								"excel",
+								"upload"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create file txt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/recibo-honorario/createFileTxt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"recibo-honorario",
+								"createFileTxt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download file txt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/api/recibo-honorario/downloadFileTxt",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"recibo-honorario",
+								"downloadFileTxt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
