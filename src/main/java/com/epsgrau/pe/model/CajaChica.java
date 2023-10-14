@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 public class CajaChica {
 
     private String fecha;
-    private String tipoDocumento;
+    private String tipoDocumentoPago;
     private String serie;
     private String numero;
     private String nota;
-    private String numeroDocumento;
+    private String numeroDocumentoIdentidad;
     private String proveedor;
     private String valorVenta;
     private String impuesto;

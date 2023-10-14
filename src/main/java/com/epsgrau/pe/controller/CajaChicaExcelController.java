@@ -1,13 +1,14 @@
 package com.epsgrau.pe.controller;
 
+import com.epsgrau.pe.helper.CajaChicaExcelHelper;
 import com.epsgrau.pe.helper.ExcelHelper;
 import com.epsgrau.pe.message.ResponseMessage;
 import com.epsgrau.pe.model.CajaChica;
-import com.epsgrau.pe.service.ExcelService;
+import com.epsgrau.pe.service.CajaChicaExcelService;
+import com.epsgrau.pe.util.Constantes;
 import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,21 +28,21 @@ import java.util.List;
 
 @CrossOrigin("http://localhost:8081")
 @Controller
-@RequestMapping("/api/excel")
-public class ExcelController {
+@RequestMapping("/api/caja-chica")
+public class CajaChicaExcelController {
 
     @Autowired
-    ExcelService fileService;
+    CajaChicaExcelService cajaChicaExcelService;
 
-    @PostMapping("/upload")
+    @PostMapping("/excel/upload")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file,
                                                       HttpServletRequest request) {
         String message = "";
         List<CajaChica> cajaChicas = new ArrayList<>();
         if (ExcelHelper.hasExcelFormat(file)) {
             try {
-                cajaChicas = fileService.saveFileService(file);
-                request.getSession().setAttribute("listaCajaChicas", cajaChicas);
+                cajaChicas = cajaChicaExcelService.saveFileService(file);
+                request.getSession().setAttribute(Constantes.LISTA_CAJA_CHICA, cajaChicas);
 
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
@@ -59,9 +60,9 @@ public class ExcelController {
     @GetMapping("/createFileTxt")
     public ResponseEntity<?> createFileTxt(HttpSession session) throws IOException {
         String filename = "cpevalidez-cajachica.txt";
-        List<CajaChica> cajaChicas = (List<CajaChica>) session.getAttribute("listaCajaChicas");
+        List<CajaChica> cajaChicas = (List<CajaChica>) session.getAttribute(Constantes.LISTA_CAJA_CHICA);
 
-        fileService.loadFileTxtService(cajaChicas);
+        cajaChicaExcelService.loadFileTxtService(cajaChicas);
 
         return ResponseEntity.ok().build();
     }
@@ -79,31 +80,5 @@ public class ExcelController {
                 .contentLength(file.contentLength())
                 .body(file);
     }
-
-//    @GetMapping("/caja-chicas")
-//    public ResponseEntity<List<CajaChica>> getAllCajaChicas() {
-//        try {
-//            List<CajaChica> cajaChicas = fileService.getAllCajaChicasService();
-//
-//            if (cajaChicas.isEmpty()) {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            }
-//
-//            return new ResponseEntity<>(cajaChicas, HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-//
-//    @GetMapping("/download")
-//    public ResponseEntity<Resource> getFile() {
-//        String filename = "tutorials.xlsx";
-//        InputStreamResource file = new InputStreamResource(fileService.loadFileService());
-//
-//        return ResponseEntity.ok()
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
-//                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
-//                .body(file);
-//    }
 
 }
