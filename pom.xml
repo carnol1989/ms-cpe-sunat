@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.epsgrau.pe</groupId>
 	<artifactId>ms-cpe-sunat</artifactId>
-	<version>1.4.2-SNAPSHOT</version>
+	<version>1.4.3-SNAPSHOT</version>
 	<name>ms-cpe-sunat</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
